@@ -1,0 +1,44 @@
+# Machine Problem 4
+from math import *
+import numpy as np
+import matplotlib.pyplot as plt
+
+yo=float(input('What is the intial height of the projectile above the ground? (in meters): '))
+vo=float(input('What is the magnitude of the initial velocity? (in m/s): '))
+theta=float(input('What is the angle with respect to the x-axis which the projectile was fired? (in radians): '))
+ax=float(input('What is the x-component of the acceleration, considering the sign? (in m/s/s) '))
+ay=float(input('What is the y-component of the acceleration, considering the sign? (in m/s/s) '))
+
+if ay==0:
+    
+    print('Y-component of the acceleration must not be equal to zero.')
+    
+else:
+    
+    vox=vo*cos(theta)
+    voy=vo*sin(theta)
+    
+    if yo==0:
+        
+        t=(2*vo*sin(theta))/abs(ay)
+        tot=np.linspace(0,t,50)
+        y=(voy*tot)+(0.5*ay*(tot**2))
+        x=(vox*tot)+(0.5*ax*(tot**2))
+        plt.plot(x,y)
+        plt.grid()
+        plt.title('Graph of the Trajectory')
+        plt.xlabel('Range Values')
+        plt.ylabel('Height Values')  
+        
+    else:
+        
+        yf=((vo**2*(sin(theta))**2))/2*abs(ay)
+        t=(-voy+sqrt(voy**2 - 4*0.5*abs(ay)*(yo-yf)))/abs(ay)
+        tot=np.linspace(0,t,50)
+        y=yo+(voy*tot)+(0.5*ay*(tot**2))
+        x=(vox*tot)+(0.5*ax*(tot**2))
+        plt.plot(x,y)
+        plt.grid()
+        plt.title('Graph of the Trajectory')
+        plt.xlabel('Range Values')
+        plt.ylabel('Height Values')
